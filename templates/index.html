@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitoneton Online Compiler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 10px;
+        }
+        #runCode {
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        #output {
+            padding: 10px;
+            background-color: #f1f1f1;
+            white-space: pre-wrap;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pitoneton Online Compiler</h1>
+    <textarea id="code" placeholder="Write your Pitoneton code here..."></textarea>
+    <button id="runCode">Run</button>
+    <h2>Output</h2>
+    <pre id="output"></pre>
+
+    <script>
+        const runCodeButton = document.getElementById('runCode');
+        const outputElement = document.getElementById('output');
+
+        runCodeButton.addEventListener('click', async () => {
+            const userCode = document.getElementById('code').value;
+
+            const response = await fetch('/execute', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ code: userCode })
+            });
+
+            const result = await response.json();
+            outputElement.textContent = result.output || result.error;
+        });
+    </script>
+</body>
+</html>
