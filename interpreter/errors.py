@@ -1,0 +1,2 @@
+class PitonetonError(Exception):
+    pass

@@ -1,4 +1,3 @@
-# Основной интерфейс интерпретатора для языка Питонетон
 from .commands import CommandProcessor
 
 class PitonetonInterpreter:
